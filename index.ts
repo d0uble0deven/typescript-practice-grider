@@ -1,3 +1,69 @@
+import { Card } from './Card';
+const myCard = new Card();
+
+class NumberHolder {
+    value: number
+}
+class StringHolder {
+    value: string;
+}
+class BooleanHolder {
+    value: boolean;
+}
+
+const numberHolder = new NumberHolder();
+numberHolder.value = 10;
+const stringHolder = new StringHolder();
+stringHolder.value = 'A String';
+const booleanHolder = new BooleanHolder();
+booleanHolder.value = true;
+
+class ValueHolder<TypeForValueProperty> {
+    value: TypeForValueProperty;
+}
+const numHolder = new ValueHolder<number>();
+numHolder.value;
+
+
+const numberWrapper = (value: number): number[] => {
+    return [value];
+};
+const stringWrapper = (value: string): string[] => {
+    return [value];
+};
+const booleanWrapper = (value: boolean): boolean[] => {
+    return [value];
+};
+
+const valueWrapper = <T>(value: T): T[] => {
+    return [value];
+}
+valueWrapper<number>(10);
+valueWrapper<boolean>(true);
+
+
+interface Driveable {
+    speed: number;
+    drive(): string; // drive method returns a string
+}
+
+class Car implements Driveable {
+    speed = 10;
+
+    drive() {
+        return `I am driving at ${this.speed}`
+    }
+}
+
+const myCar = new Car();
+
+const startDriving = (vehicle: Driveable) => {
+    vehicle.drive();
+}
+
+startDriving(myCar);
+
+
 interface Post {
     title: string,
     daysOld: number,
@@ -32,7 +98,15 @@ const printPost = (postToPrint: Post) => {
     return `${postToPrint.title} (${postToPrint.daysOld} days old.)`
 }
 
-class Car {
+
+// decorator
+const Component = (target: any) => {
+    console.log(target)
+
+}
+
+@Component
+class Cart {
     // public means property can be accessed outside of class
     public color: string;
     // private means you can not access property outside of the class
@@ -61,6 +135,6 @@ class Car {
 
 
 }
-const myCar = new Car('red', 2000);
-myCar.drive()
+const myCart = new Cart('red', 2000);
+myCart.drive()
 // myCar.putInGear() // " is private and only accessible within class 'Car'.
